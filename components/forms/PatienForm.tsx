@@ -50,14 +50,16 @@ const PatienForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
         <section className="mb-12 space-y-4">
-          <h1 className="header">Hi There </h1>
-          <p className="text-dark-700">schedule your first apointement.</p>
+          <h1 className="header">Bonjour 👋 </h1>
+          <p className="text-dark-700">
+            Réservez votre premier rendez-vous dès maintenant.
+          </p>
         </section>
         <CustomFormField
           control={form.control}
           fieldType={FormFieldType.INPUT}
           name="name"
-          label="Full name"
+          label="Nom complet"
           placeholder="yaya"
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
@@ -66,7 +68,7 @@ const PatienForm = () => {
           control={form.control}
           fieldType={FormFieldType.INPUT}
           name="email"
-          label="email"
+          label="Email"
           placeholder="Yaya@gmail.com"
           iconSrc="/assets/icons/email.svg"
           iconAlt="email"
@@ -75,7 +77,7 @@ const PatienForm = () => {
           control={form.control}
           fieldType={FormFieldType.PHONE_INPUT}
           name="phone"
-          label="Phone Number"
+          label="Numéro de téléphone"
           placeholder="(555) 123-456-789"
         />
         <SubmitButton isLoading={isLoading} />
