@@ -6,6 +6,9 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import CustomFormField from "../ui/CustomFormField";
+import SubmitButton from "../ui/SubmitButton";
+import { useState } from "react";
+import { userFormValidation } from "@/lib/validation";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -16,26 +19,32 @@ export enum FormFieldType {
   SELECT = "select",
   SKELETON = "skeleton",
 }
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-});
 
 const PatienForm = () => {
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const [isLoading, setIsLoading] = useState(false);
+
+  const form = useForm<z.infer<typeof userFormValidation>>({
+    resolver: zodResolver(userFormValidation),
     defaultValues: {
-      username: "",
+      name: "",
+      email: "",
+      phone: "",
     },
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit({
+    name,
+    email,
+    phone,
+  }: z.infer<typeof userFormValidation>) {
+    setIsLoading(true);
+
+    try {
+      const userData = { name, email, phone };
+      const user = await createUser(userData);
+    } catch (err) {
+      console.log(err);
+    }
   }
   return (
     <Form {...form}>
@@ -53,7 +62,23 @@ const PatienForm = () => {
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
         />
-        <Button type="submit">Submit</Button>
+        <CustomFormField
+          control={form.control}
+          fieldType={FormFieldType.INPUT}
+          name="email"
+          label="email"
+          placeholder="Yaya@gmail.com"
+          iconSrc="/assets/icons/email.svg"
+          iconAlt="email"
+        />
+        <CustomFormField
+          control={form.control}
+          fieldType={FormFieldType.PHONE_INPUT}
+          name="phone"
+          label="Phone Number"
+          placeholder="(555) 123-456-789"
+        />
+        <SubmitButton isLoading={isLoading} />
       </form>
     </Form>
   );

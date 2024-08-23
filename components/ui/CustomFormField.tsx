@@ -1,3 +1,5 @@
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 import {
   FormControl,
   FormDescription,
@@ -9,6 +11,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Control } from "react-hook-form";
 import { FormFieldType } from "../forms/PatienForm";
+import Image from "next/image";
+
 interface CustomProps {
   control: Control<any>;
   fieldType: FormFieldType;
@@ -23,7 +27,47 @@ interface CustomProps {
   children?: React.ReactNode;
   renderSkeleton?: (field: any) => React.ReactNode;
 }
-const CustomFormField = ({ control, fieldType, name, label }: CustomProps) => {
+const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
+  const { fieldType, iconAlt, iconSrc, placeholder } = props;
+  switch (fieldType) {
+    case FormFieldType.INPUT:
+      return (
+        <div className="flex rounded-md border border-dark-500 bg-dark-400">
+          {iconSrc && (
+            <Image
+              src={iconSrc}
+              height={24}
+              width={24}
+              alt={iconAlt || "icon"}
+              className="ml-2"
+            />
+          )}
+          <FormControl>
+            <Input
+              placeholder={placeholder}
+              {...field}
+              className="shad-input border-0"
+            />
+          </FormControl>
+        </div>
+      );
+    case FormFieldType.PHONE_INPUT:
+      return (
+        <PhoneInput
+          defaultCountry="US"
+          placeholder={placeholder}
+          international
+          withCountryCallingCode
+          value={field.value as "E164Number" | undefined}
+          onChange={field.onChange}
+          className="input-phone"
+        />
+      );
+  }
+};
+
+const CustomFormField = (props: CustomProps) => {
+  const { control, fieldType, name, label } = props;
   return (
     <div>
       <FormField
@@ -34,6 +78,8 @@ const CustomFormField = ({ control, fieldType, name, label }: CustomProps) => {
             {fieldType !== FormFieldType.CHECKBOX && label && (
               <FormLabel>{label}</FormLabel>
             )}
+            <RenderField field={field} props={props} />
+            <FormMessage className="shad-error" />
           </FormItem>
         )}
       />
