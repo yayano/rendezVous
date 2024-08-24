@@ -9,6 +9,7 @@ import CustomFormField from "../ui/CustomFormField";
 import SubmitButton from "../ui/SubmitButton";
 import { useState } from "react";
 import { userFormValidation } from "@/lib/validation";
+import { useRouter } from "next/navigation";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -21,6 +22,7 @@ export enum FormFieldType {
 }
 
 const PatienForm = () => {
+  const router = useRouter;
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof userFormValidation>>({
@@ -40,8 +42,9 @@ const PatienForm = () => {
     setIsLoading(true);
 
     try {
-      const userData = { name, email, phone };
-      const user = await createUser(userData);
+      // const userData = { name, email, phone };
+      // const user = await createUser(userData);
+      // if (user) router.push(`/patients/${user.id}/register`);
     } catch (err) {
       console.log(err);
     }
@@ -80,7 +83,7 @@ const PatienForm = () => {
           label="Numéro de téléphone"
           placeholder="(555) 123-456-789"
         />
-        <SubmitButton isLoading={isLoading} />
+        <SubmitButton isLoading={isLoading}>Commencer</SubmitButton>
       </form>
     </Form>
   );

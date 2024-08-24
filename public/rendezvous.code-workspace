@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"name": "rendezvous",
+		"path": "rendezvous"
+	},
+	{
+		"name": "public",
+		"path": "../Downloads/carepulse_public/public"
+	}
+],
+  "settings": {}
+}
