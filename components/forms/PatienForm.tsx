@@ -10,6 +10,7 @@ import SubmitButton from "../ui/SubmitButton";
 import { useState } from "react";
 import { userFormValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/actions/patient.action";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -22,7 +23,7 @@ export enum FormFieldType {
 }
 
 const PatienForm = () => {
-  const router = useRouter;
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof userFormValidation>>({
@@ -42,12 +43,16 @@ const PatienForm = () => {
     setIsLoading(true);
 
     try {
-      // const userData = { name, email, phone };
-      // const user = await createUser(userData);
-      // if (user) router.push(`/patients/${user.id}/register`);
+      const userData = { name, email, phone };
+      const user = await createUser(userData);
+      console.log(user);
+      if (user) {
+        router.push(`/patients/${user.$id}/register`);
+      }
     } catch (err) {
-      console.log(err);
+      console.log("error from create", err);
     }
+    setIsLoading(false);
   }
   return (
     <Form {...form}>
