@@ -54,7 +54,7 @@ const RegisterForm = ({ user }: { user: User }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-12 flex-1"
+        className="flex-1 space-y-12 "
       >
         <section className=" space-y-4">
           <h1 className="header">Bienvenue 👋 </h1>
@@ -67,6 +67,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             <h2 className="sub-header">Informations Personnel</h2>
           </div>
         </section>
+
         <CustomFormField
           control={form.control}
           fieldType={FormFieldType.INPUT}
@@ -76,7 +77,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
         />
-        <div className="flex flex-col gap-6 xl:flex-row">
+        <div className="flex flex-col gap-6    xl:flex-row">
           <CustomFormField
             control={form.control}
             fieldType={FormFieldType.INPUT}
@@ -133,7 +134,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             fieldType={FormFieldType.INPUT}
             name="address"
             label="Address"
-            placeholder="14th street new York"
+            placeholder="14 street, New york, NY - 5101"
           />
           <CustomFormField
             control={form.control}
@@ -271,6 +272,29 @@ const RegisterForm = ({ user }: { user: User }) => {
               <FileUploader files={field.value} onChange={field.onChange} />
             </FormControl>
           )}
+        />
+        <section className=" space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Consent and Privacy </h2>
+          </div>
+        </section>
+        <CustomFormField
+          fieldType={FormFieldType.CHECKBOX}
+          control={form.control}
+          name="treatmentConsent"
+          label="I consent to treatment"
+        />
+        <CustomFormField
+          fieldType={FormFieldType.CHECKBOX}
+          control={form.control}
+          name="disclosureConsent"
+          label="I consent to disclosure of information"
+        />
+        <CustomFormField
+          fieldType={FormFieldType.CHECKBOX}
+          control={form.control}
+          name="privacyConsent"
+          label="I consent to privacy policy"
         />
         <div className="flex flex-col gap-6 xl:flex-row"></div>
         <SubmitButton isLoading={isLoading}>Commencer</SubmitButton>

@@ -1,4 +1,4 @@
-import PatienForm from "@/components/forms/PatienForm";
+import PatientForm from "@/components/forms/PatienForm";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,7 +17,7 @@ export default function Home() {
               alt="patient"
               className="mb-12 h-10 w-fit"
             />
-            <PatienForm />
+            <PatientForm />
             <div className="text-14-regular mt-20 flex justify-between">
               <p className="justify-items-end text-dark-600 xl:text-left">
                 © 2024 yayano™

@@ -18,6 +18,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "./select";
 import { Textarea } from "./textarea";
+import { Checkbox } from "./checkbox";
 
 interface CustomProps {
   control: Control<any>;
@@ -123,6 +124,21 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             className="shad-textarea"
             disabled={props.disabled}
           />
+        </FormControl>
+      );
+    case FormFieldType.CHECKBOX:
+      return (
+        <FormControl>
+          <div className="flex items-center gap-4">
+            <Checkbox
+              id={props.name}
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            />
+            <label htmlFor={props.name} className="checkbox-label">
+              {props.label}
+            </label>
+          </div>
         </FormControl>
       );
     case FormFieldType.SKELETON:
