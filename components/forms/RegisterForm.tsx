@@ -16,6 +16,7 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Doctors, GenderOptions, IdentificationTypes } from "@/constants";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
+import FileUploader from "../ui/FileUploader";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -253,7 +254,24 @@ const RegisterForm = ({ user }: { user: User }) => {
             </SelectItem>
           ))}
         </CustomFormField>
-
+        <CustomFormField
+          control={form.control}
+          fieldType={FormFieldType.INPUT}
+          name="identificationNumber"
+          label="Identification number"
+          placeholder="1234567890"
+        />
+        <CustomFormField
+          control={form.control}
+          fieldType={FormFieldType.SKELETON}
+          name="identificationDocument"
+          label="Scanned copy of identification document"
+          renderSkeleton={(field) => (
+            <FormControl>
+              <FileUploader files={field.value} onChange={field.onChange} />
+            </FormControl>
+          )}
+        />
         <div className="flex flex-col gap-6 xl:flex-row"></div>
         <SubmitButton isLoading={isLoading}>Commencer</SubmitButton>
       </form>
