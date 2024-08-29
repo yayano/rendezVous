@@ -69,6 +69,6 @@ export const registerPatient = async ({
     );
     return parseStringify(newPatient);
   } catch (error) {
-    console.log("an error while register patient");
+    console.log("an error while register patient", error);
   }
 };
