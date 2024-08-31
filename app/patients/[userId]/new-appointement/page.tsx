@@ -9,6 +9,7 @@ export default async function NewAppointement({
   params: { userId },
 }: SearchParamProps) {
   const patient = await getPatient(userId);
+
   return (
     <div>
       <div className="flex h-screen max-h-screen">

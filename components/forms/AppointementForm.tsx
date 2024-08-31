@@ -17,13 +17,13 @@ import Image from "next/image";
 import { createAppointment } from "@/lib/actions/appointement.action";
 
 const AppointementForm = ({
+  type = "create",
   userId,
   patientId,
-  type,
 }: {
+  type: "create" | "cancel" | "schedule";
   userId: string;
   patientId: string;
-  type: "create" | "cancel" | "schedule";
 }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -45,24 +45,29 @@ const AppointementForm = ({
     switch (type) {
       case "schedule":
         status = "scheduled";
+        break;
       case "cancel":
         status = "cancelled";
+        break;
       default:
         status = "pending";
         break;
     }
     try {
       if (type === "create" && patientId) {
+        console.log("here userId", userId);
         const appointmentData = {
           userId,
           patient: patientId,
           primaryPhysician: values.primaryPhysician,
           schedule: new Date(values.schedule),
           reason: values.reason!,
-          note: values.note,
           status: status as Status,
+          note: values.note,
         };
+
         const appointment = await createAppointment(appointmentData);
+
         if (appointment) {
           form.reset();
           router.push(
