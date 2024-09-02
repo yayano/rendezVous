@@ -9,7 +9,21 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
-const AppointmentModal = ({ type }: { type: "schedule" | "cancel" }) => {
+import AppointementForm from "./forms/AppointementForm";
+import { Appointment } from "@/types/appwrite.types";
+const AppointmentModal = ({
+  type,
+  userId,
+  patientId,
+  appointment,
+}: {
+  patientId: string;
+  userId: string;
+  appointment?: Appointment;
+  type: "schedule" | "cancel";
+  title: string;
+  description: string;
+}) => {
   const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -28,6 +42,13 @@ const AppointmentModal = ({ type }: { type: "schedule" | "cancel" }) => {
             Please fill in the following details to {type} an appointment
           </DialogDescription>
         </DialogHeader>
+        <AppointementForm
+          userId={userId}
+          patientId={patientId}
+          type={type}
+          appointment={appointment}
+          setOpen={setOpen}
+        />
       </DialogContent>
     </Dialog>
   );

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 
 import StatusBadge from "../StatusBadge";
 import AppointmentModal from "../AppointmentModal";
+import { Appointment } from "@/types/appwrite.types";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Payment = {
@@ -16,7 +17,7 @@ export type Payment = {
   email: string;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Appointment>[] = [
   {
     header: "ID",
     cell: ({ row }) => <p className="text-14-medium">{row.index + 1}</p>,
@@ -43,10 +44,25 @@ export const columns: ColumnDef<Payment>[] = [
     id: "actions",
     header: () => <div className="pl-4">Actions</div>,
     cell: ({ row }) => {
+      const appointment = row.original;
       return (
         <div className="flex gap-1">
-          <AppointmentModal type="schedule" />
-          <AppointmentModal type="cancel" />
+          <AppointmentModal
+            patientId={appointment.patient.$id}
+            userId={appointment.userId}
+            appointment={appointment}
+            type="schedule"
+            title="Schedule Appointment"
+            description="Please confirm the following details to schedule."
+          />
+          <AppointmentModal
+            patientId={appointment.patient.$id}
+            userId={appointment.userId}
+            appointment={appointment}
+            type="cancel"
+            title="Cancel Appointment"
+            description="Are you sure you want to cancel your appointment?"
+          />
         </div>
       );
     },

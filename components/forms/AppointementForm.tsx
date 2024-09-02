@@ -15,15 +15,20 @@ import { Doctors } from "@/constants";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
 import { createAppointment } from "@/lib/actions/appointement.action";
+import { Appointment } from "@/types/appwrite.types";
 
 const AppointementForm = ({
-  type = "create",
   userId,
   patientId,
+  type = "create",
+  appointment,
+  setOpen,
 }: {
   type: "create" | "cancel" | "schedule";
   userId: string;
   patientId: string;
+  appointment?: Appointment;
+  setOpen: (open: boolean) => void;
 }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
