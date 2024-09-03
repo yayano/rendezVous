@@ -8,14 +8,8 @@ import { Button } from "@/components/ui/button";
 import StatusBadge from "../StatusBadge";
 import AppointmentModal from "../AppointmentModal";
 import { Appointment } from "@/types/appwrite.types";
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
+import { Doctors } from "@/constants";
+import Image from "next/image";
 
 export const columns: ColumnDef<Appointment>[] = [
   {
@@ -38,6 +32,29 @@ export const columns: ColumnDef<Appointment>[] = [
         <StatusBadge status={row.original.status} />
       </div>
     ),
+  },
+  {
+    accessorKey: "primaryPhysician",
+    header: "Doctor",
+    cell: ({ row }) => {
+      const appointment = row.original;
+      const doctor = Doctors.find(
+        (doctor) => doctor.name === appointment.primaryPhysician
+      );
+      console.log(doctor);
+      return (
+        <div className="flex items-center gap-3">
+          <Image
+            src={doctor?.image!}
+            alt="doctor"
+            width={100}
+            height={100}
+            className="size-8"
+          />
+          <p className="whitespace-nowrap">Dr. {doctor?.name}</p>
+        </div>
+      );
+    },
   },
 
   {
