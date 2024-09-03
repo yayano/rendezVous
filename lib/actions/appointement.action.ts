@@ -4,8 +4,9 @@ import {
   APPOINTEMENT_COLLECTION_ID,
   DATABASE_ID,
   databases,
+  messaging,
 } from "../appwrite.config";
-import { parseStringify } from "../utils";
+import { formatDateTime, parseStringify } from "../utils";
 import { Appointment } from "@/types/appwrite.types";
 import { revalidatePath } from "next/cache";
 
@@ -84,10 +85,36 @@ export const updateAppointment = async ({
     if (!updateAppointment) {
       throw new Error("Failed to update appointment");
     }
-    // TODO: SMS notification
+    // SMS notification
+
+    const smsMessage = `Greetings from CarePulse. ${
+      type === "schedule"
+        ? `Your appointment is confirmed for ${
+            formatDateTime(appointment.schedule!).dateTime
+          } with Dr. ${appointment.primaryPhysician}`
+        : `We regret to inform that your appointment for ${
+            formatDateTime(appointment.schedule!).dateTime
+          } is cancelled. Reason:  ${appointment.cancellationReason}`
+    }.`;
+    await sendSMSNotification(userId, smsMessage);
     revalidatePath("/admin");
     return parseStringify(updatedAppointment);
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const sendSMSNotification = async (userId: string, content: string) => {
+  try {
+    const message = await messaging.createSms(
+      ID.unique(),
+      content,
+      [],
+      [userId]
+    );
+    console.log(message);
+    return parseStringify(message);
+  } catch (error) {
+    console.log("Failed to send SMS notification", error);
   }
 };

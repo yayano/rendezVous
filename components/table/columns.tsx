@@ -41,7 +41,7 @@ export const columns: ColumnDef<Appointment>[] = [
       const doctor = Doctors.find(
         (doctor) => doctor.name === appointment.primaryPhysician
       );
-      console.log(doctor);
+
       return (
         <div className="flex items-center gap-3">
           <Image
