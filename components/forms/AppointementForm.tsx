@@ -27,7 +27,7 @@ const AppointementForm = ({
   appointment,
   setOpen,
 }: {
-  type: "create" | "cancel" | "schedule";
+  type: "create" | "annuler" | "planifier";
   userId: string;
   patientId: string;
   appointment?: Appointment;
@@ -53,10 +53,10 @@ const AppointementForm = ({
     setIsLoading(true);
     let status;
     switch (type) {
-      case "schedule":
+      case "planifier":
         status = "scheduled";
         break;
-      case "cancel":
+      case "annuler":
         status = "cancelled";
         break;
       default:
@@ -107,14 +107,14 @@ const AppointementForm = ({
   console.log(type);
   let buttonLabel;
   switch (type) {
-    case "cancel":
-      buttonLabel = "Cancel appointement ";
+    case "annuler":
+      buttonLabel = "Annuler le rendez-vous ";
       break;
     case "create":
-      buttonLabel = "Create appointement";
+      buttonLabel = "Créer un rendez-vous";
       break;
-    case "schedule":
-      buttonLabel = "schedule appointement";
+    case "planifier":
+      buttonLabel = "Planifier un rendez-vous";
       break;
 
     default:
@@ -125,13 +125,13 @@ const AppointementForm = ({
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
         {type === "create" && (
           <section className="mb-12 space-y-4">
-            <h1 className="header">New appointement </h1>
+            <h1 className="header">Nouveau rendez-vous</h1>
             <p className="text-dark-700">
               Réservez votre premier rendez-vous dans 10 seconds.
             </p>
           </section>
         )}
-        {type !== "cancel" && (
+        {type !== "annuler" && (
           <>
             <CustomFormField
               control={form.control}
@@ -159,7 +159,7 @@ const AppointementForm = ({
               fieldType={FormFieldType.DATE_PICKER}
               control={form.control}
               name="schedule"
-              label="Expected appointment date"
+              label="Date prévue du rendez-vous"
               showTimeSelect
               dateFormat="MM/dd/yyyy  -  h:mm aa"
             />
@@ -168,32 +168,32 @@ const AppointementForm = ({
                 control={form.control}
                 fieldType={FormFieldType.TEXTAREA}
                 name="reason"
-                label="reason for appointment"
-                placeholder="Enter reason for appointment"
+                label="Raison du rendez-vous"
+                placeholder="Saisir la raison du rendez-vous"
               />
               <CustomFormField
                 control={form.control}
                 fieldType={FormFieldType.TEXTAREA}
                 name="noteS"
                 label="Notes"
-                placeholder="Enter notes"
+                placeholder="Saisir les notes"
               />
             </div>
           </>
         )}
-        {type === "cancel" && (
+        {type === "annuler" && (
           <CustomFormField
             control={form.control}
             fieldType={FormFieldType.TEXTAREA}
             name="cancellationReason"
-            label="Reason for cancellation"
-            placeholder="Enter reason for cancellation"
+            label="Raison de l'annulation"
+            placeholder="Saisir la raison de l'annulation"
           />
         )}
         <SubmitButton
           isLoading={isLoading}
           className={`${
-            type === "schedule" ? "shad-primary-btn" : "shad-danger-btn"
+            type === "planifier" ? "shad-danger-btn" : "shad-primary-btn"
           } w-full
         `}
         >

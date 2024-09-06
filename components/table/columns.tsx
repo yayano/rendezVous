@@ -26,7 +26,7 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: "Statut",
     cell: ({ row }) => (
       <div className="min-w-[115px]">
         <StatusBadge status={row.original.status} />
@@ -35,7 +35,7 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "primaryPhysician",
-    header: "Doctor",
+    header: "Médecin",
     cell: ({ row }) => {
       const appointment = row.original;
       const doctor = Doctors.find(
@@ -68,17 +68,17 @@ export const columns: ColumnDef<Appointment>[] = [
             patientId={appointment.patient.$id}
             userId={appointment.userId}
             appointment={appointment}
-            type="schedule"
-            title="Schedule Appointment"
-            description="Please confirm the following details to schedule."
+            type="planifier"
+            title="Planifier un rendez-vous"
+            description="Veuillez confirmer les détails suivants pour planifier."
           />
           <AppointmentModal
             patientId={appointment.patient.$id}
             userId={appointment.userId}
             appointment={appointment}
-            type="cancel"
+            type="annuler"
             title="Cancel Appointment"
-            description="Are you sure you want to cancel your appointment?"
+            description="Êtes-vous sûr de vouloir annuler votre rendez-vous ?"
           />
         </div>
       );

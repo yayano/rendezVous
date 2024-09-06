@@ -23,28 +23,28 @@ const Admin = async () => {
       </header>
       <main className="admin-main">
         <section className="w-full space-y-4">
-          <h1>Welcome 👋 </h1>
+          <h1>Bienvenue 👋 </h1>
           <p className="text-dark-700">
-            Start the day with managing new appointment
+            Commencez la journée en gérant les nouveaux rendez-vous
           </p>
         </section>
         <section className="admin-stat">
           <StatCard
             type="appointments"
             count={appointments.scheduledCount}
-            label="Scheduled appointment"
+            label="Rendez-vous programmé"
             icon="/assets/icons/appointments.svg"
           />
           <StatCard
             type="pending"
             count={appointments.pendingCount}
-            label="Pending appointment"
+            label="Rendez-vous en attente"
             icon="/assets/icons/pending.svg"
           />
           <StatCard
             type="cancelled"
             count={appointments.cancelledCount}
-            label="Cancelled appointment"
+            label="Rendez-vous annulé"
             icon="/assets/icons/cancelled.svg"
           />
         </section>
