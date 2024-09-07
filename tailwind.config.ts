@@ -38,6 +38,7 @@ const config = {
           200: "#E8E9E9",
         },
         dark: {
+          100: "#121212",
           200: "#0D0F10",
           300: "#131619",
           400: "#1A1D21",
@@ -45,6 +46,12 @@ const config = {
           600: "#76828D",
           700: "#ABB8C4",
         },
+        yayaTm: {
+          100: "#2D3250",
+          200: "#424769",
+          300: "#7077A1",
+        },
+        yayaOrange: "#F6B17A",
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],

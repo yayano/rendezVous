@@ -57,8 +57,8 @@ const PatienForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
         <section className="mb-12 space-y-4">
-          <h1 className="header">Bonjour 👋 </h1>
-          <p className="text-dark-700">
+          <h1 className="header">Bonjour 🌼 🌷 🌼 🌺 🌸 </h1>
+          <p className="text-yayaTm-300">
             Réservez votre premier rendez-vous dès maintenant.
           </p>
         </section>

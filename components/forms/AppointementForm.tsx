@@ -193,13 +193,12 @@ const AppointementForm = ({
         <SubmitButton
           isLoading={isLoading}
           className={`${
-            type === "planifier" ? "shad-danger-btn" : "shad-primary-btn"
+            type === "create" ? "shad-danger-btn" : "shad-primary-btn"
           } w-full
         `}
         >
           {buttonLabel}
         </SubmitButton>
-        <p>{type}</p>
       </form>
     </Form>
   );

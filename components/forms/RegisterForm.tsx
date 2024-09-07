@@ -72,8 +72,8 @@ const RegisterForm = ({ user }: { user: User }) => {
         className="flex-1 space-y-12 "
       >
         <section className=" space-y-4">
-          <h1 className="header">Bienvenue 👋 </h1>
-          <p className="text-dark-700">
+          <h1 className="header">Bienvenue 🌼 🌺 🌸 🌼 🌷 </h1>
+          <p className="text-yayaTm-200">
             Réservez votre premier rendez-vous dès maintenant.
           </p>
         </section>
