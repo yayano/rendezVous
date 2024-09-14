@@ -102,3 +102,5 @@ For any questions or support, please contact:
 - **Name:** Yahia
 - **Email:** boussetta13yahia@gmail.com
 - **GitHub:** [yayano](https://github.com/yayano)
+## Deployment
+- **server:** Vercel
