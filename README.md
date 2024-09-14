@@ -4,6 +4,8 @@
 
 The Patient Appointment Management System is a web-based application designed to streamline the process of scheduling and managing patient appointments with doctors. The system allows for the collection of patient information, scheduling of appointments, and management of existing appointments by an admin. The admin has the capability to both schedule and cancel appointments as needed.
 
+![System Overview](/public/assets/Overview.png)
+
 ## Features
 
 - **Patient Information Management:** Collect and store patient details such as name, contact information, and medical history.
